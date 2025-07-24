@@ -9,7 +9,7 @@ GNOME shell extension to arrange workspaces in a two dimensional grid with works
    <sup>Theme: <a href="https://github.com/mzur/Numix-Complement">Numix-Complement</a></sup>
 </p>
 
-This is a clone of the [Workspace Grid](https://github.com/zakkak/workspace-grid) extension. I was not able to wrap my head around Workspace Grid so I started to implement my own extension to get the features I wanted.
+This is an independent fork of the [Workspace Matrix](https://github.com/mzur/gnome-shell-wsmatrix) extension. User's selected "Wraparound mode" was not persisting, so I decided to fork it and fix it. Later on, I want to make substational changes to the extension, so I left the parent extension's [fork network](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/detaching-a-fork).
 
 ## Features
 
