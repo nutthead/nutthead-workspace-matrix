@@ -1,0 +1,21 @@
+{
+  "title": "Wraparound Mode setting not persisting between sessions",
+  "body": "## Problem Description\n\nThe \"Wraparound Mode\" setting in General Settings does not persist between sessions. When a user:\n\n1. Opens extension settings\n2. Changes Wraparound Mode from 'None' to any other option ('Next/Previous', 'Rows/Columns', 'Next/Previous Bordered')\n3. Closes the settings panel\n4. Reopens the settings panel\n\nThe setting reverts to 'None' instead of showing the user's selected option.\n\n## Expected Behavior\n\nThe Wraparound Mode setting should persist between sessions and display the user's last selected option when the settings panel is reopened.\n\n## Actual Behavior\n\nThe setting always shows 'None' regardless of what the user previously selected.\n\n## Steps to Reproduce\n\n1. Open GNOME extension preferences: `gnome-extensions prefs hello@behrang.org`\n2. Change Wraparound Mode from 'None' to 'Next/Previous'\n3. Close the preferences window\n4. Reopen the preferences window\n5. Observe that Wraparound Mode shows 'None' instead of 'Next/Previous'\n\n## Technical Context\n\n- Extension uses GSettings schema: `org.gnome.shell.extensions.org.nutthead.workspace-matrix-settings`\n- Wraparound mode key: `wraparound-mode` (enum type)\n- Enum values: 'none', 'next-previous', 'rows-columns', 'next-previous-border'\n- Preferences UI: GTK4/Adwaita ComboRow in `prefs.js`\n\n## Impact\n\n- **Severity**: Medium\n- **User Experience**: Poor - users cannot persist their preferred navigation behavior\n- **Functionality**: Core workspace navigation feature not working as intended\n\n## Environment\n\n- GNOME Shell: 48\n- Extension Version: Current development version\n- Extension UUID: hello@behrang.org",
+  "labels": [
+    {
+      "name": "bug",
+      "color": "d73a4a",
+      "description": "Something isn't working"
+    },
+    {
+      "name": "settings",
+      "color": "0052cc", 
+      "description": "Issues related to extension settings and preferences"
+    },
+    {
+      "name": "high-priority",
+      "color": "b60205",
+      "description": "High priority issue affecting core functionality"
+    }
+  ]
+}
