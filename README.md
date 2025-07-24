@@ -39,9 +39,9 @@ To configure the extension, return to the [extension page](https://extensions.gn
 
 ### Manual Linux Method
 
-1. Download the ZIP file of the [latest release](https://github.com/mzur/gnome-shell-wsmatrix/releases) and extract it to `~/.local/share/gnome-shell/extensions/wsmatrix@martin.zurowietz.de` 
+1. Download the ZIP file of the [latest release](https://github.com/nutthead/nutthead-workspace-matrix/releases) and extract it to `~/.local/share/gnome-shell/extensions/hello@behrang.org` 
 2. [Restart](#how-do-i-restart-gnome-shell) GNOME Shell.
-3. Run `gnome-extensions enable wsmatrix@martin.zurowietz.de` in the terminal.
+3. Run `gnome-extensions enable hello@behrang.org` in the terminal.
 4. [Restart](#how-do-i-restart-gnome-shell) GNOME Shell a second time.
 
 ### Arch Linux Method
@@ -74,19 +74,19 @@ nix-env -iA nixpkgs.gnomeExtensions.workspace-matrix
 
 ### My windows jump between workspaces after the machine was locked or suspended
 
-Disable the extension, set workspaces to "static" in GNOME Tweaks and then enable this extension again. ([#29](https://github.com/mzur/gnome-shell-wsmatrix/issues/29))
+Disable the extension, set workspaces to "static" in GNOME Tweaks and then enable this extension again.
 
 ### How do I change the keyboard shortcuts?
 
-Take a look at the [wiki](https://github.com/mzur/gnome-shell-wsmatrix/wiki/Custom-keyboard-shortcuts) for the available shortcuts of this extension and how to change them.
+See the extension's repository documentation for information about available keyboard shortcuts.
 
 ### How do I change the workspace labels?
 
-Take a look at the [wiki](https://github.com/mzur/gnome-shell-wsmatrix/wiki/Assigning-custom-labels-to-workspaces) for a how-to.
+See the extension's repository documentation for information about assigning custom workspace labels.
 
 ### How do I manually open the Workspace Matrix preferences window?
 
-Go to the terminal and run `gnome-extensions prefs wsmatrix@martin.zurowietz.de` and the preferences pop-up should appear. Closing this pop-up will save any changes.
+Go to the terminal and run `gnome-extensions prefs hello@behrang.org` and the preferences pop-up should appear. Closing this pop-up will save any changes.
 
 
 ## Contributing
@@ -101,13 +101,10 @@ You can develop this extension "live" while it is installed in GNOME on your sys
 
 1. Uninstall this extension if it is already installed. You can do this via the [GNOME Shell Extensions](https://extensions.gnome.org/extension/1485/workspace-matrix/) website.
 2. Fork this repository and clone your fork somewhere, e.g. to `~/code/gnome-shell-wsmatrix`.
-3. (optional) If testing a pull request, you may checkout the branch of the pull request using the [`gh`](https://github.com/cli/cli) utility command e.g.:
-   ```
-   gh pr checkout https://github.com/mzur/gnome-shell-wsmatrix/pull/152
-   ```
+3. (optional) If testing a pull request, you may checkout the branch of the pull request using the [`gh`](https://github.com/cli/cli) utility command.
 4. Create a symlink from the repository to the GNOME extensions directory, e.g.:
    ```
-   ln -s ~/code/gnome-shell-wsmatrix/wsmatrix@martin.zurowietz.de ~/.local/share/gnome-shell/extensions/wsmatrix@martin.zurowietz.de
+   ln -s ~/code/nutthead-workspace-matrix/hello@behrang.org ~/.local/share/gnome-shell/extensions/hello@behrang.org
    ```
 5. Restart GNOME by pressing <kbd>Alt</kbd>+<kbd>F2</kbd> and running the command `r` (X.org) or log out and back in (Wayland). Do this whenever you want to apply and test a change of the code.
 
