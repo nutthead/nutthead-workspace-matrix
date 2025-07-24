@@ -96,6 +96,10 @@ export default class Prefs extends ExtensionPreferences {
             title: _(title),
         });
         row.set_model(new Gtk.StringList({strings}));
+        
+        // Initialize ComboRow with current GSettings value
+        row.selected = settings.get_enum(settingsKey);
+        
         row.connect('notify::selected', (row) => {
             settings.set_enum(settingsKey, row.selected);
         });
