@@ -1,4 +1,4 @@
-UUID=wsmatrix@martin.zurowietz.de
+UUID=hello@behrang.org
 
 default: clean schemas zip
 
