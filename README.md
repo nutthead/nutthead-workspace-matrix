@@ -100,7 +100,7 @@ If you want to report a bug, please attach the output of the command `journalctl
 You can develop this extension "live" while it is installed in GNOME on your system:
 
 1. Uninstall this extension if it is already installed. You can do this via the [GNOME Shell Extensions](https://extensions.gnome.org/extension/1485/workspace-matrix/) website.
-2. Fork this repository and clone your fork somewhere, e.g. to `~/code/gnome-shell-wsmatrix`.
+2. Fork this repository and clone your fork somewhere, e.g. to `~/code/nutthead-workspace-matrix`.
 3. (optional) If testing a pull request, you may checkout the branch of the pull request using the [`gh`](https://github.com/cli/cli) utility command.
 4. Create a symlink from the repository to the GNOME extensions directory, e.g.:
    ```
