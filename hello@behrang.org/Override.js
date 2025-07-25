@@ -1,19 +1,19 @@
-import {InjectionManager} from 'resource:///org/gnome/shell/extensions/extension.js';
+import { InjectionManager } from "resource:///org/gnome/shell/extensions/extension.js";
 
 export default class Override {
-    constructor() {
-        this._im = new InjectionManager();
-    }
+	constructor() {
+		this._im = new InjectionManager();
+	}
 
-    enable () {
-        //
-    }
+	enable() {
+		//
+	}
 
-    destroy() {
-        this.disable();
-    }
+	destroy() {
+		this.disable();
+	}
 
-    disable() {
-        this._im.clear();
-    }
+	disable() {
+		this._im.clear();
+	}
 }

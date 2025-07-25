@@ -12,9 +12,14 @@ mkdir -p ~/.local/share/gnome-shell/extensions/hello@behrang.org
 # Copy files
 cp -r "$PROJECT_ROOT/hello@behrang.org"/* ~/.local/share/gnome-shell/extensions/hello@behrang.org/
 
-# Compile schemas
+# Compile schemas locally in extension directory
 cd ~/.local/share/gnome-shell/extensions/hello@behrang.org || exit
-make schemas
+glib-compile-schemas schemas/
+
+# Also install schemas globally for "See Details" button to work
+mkdir -p ~/.local/share/glib-2.0/schemas
+cp schemas/org.gnome.shell.extensions.workspace-matrix.gschema.xml ~/.local/share/glib-2.0/schemas/
+glib-compile-schemas ~/.local/share/glib-2.0/schemas/
 
 echo "✅ Extension installed!"
 echo ""

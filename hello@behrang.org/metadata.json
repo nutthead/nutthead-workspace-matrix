@@ -1,20 +1,15 @@
 {
-    "shell-version": [
-		"46",
-		"47",
-		"48",
-		"49"
-    ],
-    "uuid": "hello@behrang.org",
-    "url": "https://github.com/nutthead/nutthead-workspace-matrix",
-    "settings-schema": "org.gnome.shell.extensions.org.nutthead.workspace-matrix-settings",
-    "keybindings-schema": "org.gnome.shell.extensions.org.nutthead.workspace-matrix-keybindings",
-    "gettext-domain": "wsmatrix",
-    "version": -1,
-    "name": "Workspace Matrix",
-    "description": "Arrange workspaces in a two dimensional grid with workspace thumbnails.\n\nIf you appreciate this extension please consider to donate $1.",
-    "donations": {
-        "paypal": "behrangsa",
-        "github": "behrangsa"
-    }
+	"shell-version": ["46", "47", "48", "49"],
+	"uuid": "hello@behrang.org",
+	"url": "https://github.com/nutthead/nutthead-workspace-matrix",
+	"settings-schema": "org.gnome.shell.extensions.org.nutthead.workspace-matrix-settings",
+	"keybindings-schema": "org.gnome.shell.extensions.org.nutthead.workspace-matrix-keybindings",
+	"gettext-domain": "workspace-matrix",
+	"version": -1,
+	"name": "Workspace Matrix",
+	"description": "Arrange workspaces in a two dimensional grid with workspace thumbnails.\n\nIf you appreciate this extension please consider to donate $1.",
+	"donations": {
+		"paypal": "behrangsa",
+		"github": "behrangsa"
+	}
 }

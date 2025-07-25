@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(git checkout:*)",
-      "Bash(gnome-extensions list:*)"
+      "Bash(gnome-extensions list:*)",
+      "WebFetch(domain:gjs.guide)",
+      "Bash(biome lint:*)",
+      "Bash(eslint --version)",
+      "Bash(eslint:*)"
     ],
     "deny": []
   }
