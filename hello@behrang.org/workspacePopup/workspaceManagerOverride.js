@@ -75,8 +75,8 @@ export default class WorkspaceManagerOverride {
     }
 
     _restoreOriginalProperties() {
-        if (this.wm._wsmatrixTimeoutId) {
-            GLib.source_remove(this.wm._wsmatrixTimeoutId);
+        if (this.wm._workspaceMatrixTimeoutId) {
+            GLib.source_remove(this.wm._workspaceMatrixTimeoutId);
         }
 
         this.overrideProperties.forEach(function (prop) {
@@ -354,7 +354,7 @@ export default class WorkspaceManagerOverride {
         this._canScroll = false;
         // Store the timeout ID to remove it on destroy as per a review requested on
         // e.g.o.
-        this._wsmatrixTimeoutId =
+        this._workspaceMatrixTimeoutId =
             GLib.timeout_add(GLib.PRIORITY_DEFAULT,
                 SCROLL_TIMEOUT_TIME, () => {
                     this._canScroll = true;
