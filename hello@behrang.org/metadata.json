@@ -1,6 +1,9 @@
 {
     "shell-version": [
-		"48"
+		"46",
+		"47",
+		"48",
+		"49"
     ],
     "uuid": "hello@behrang.org",
     "url": "https://github.com/nutthead/nutthead-workspace-matrix",
