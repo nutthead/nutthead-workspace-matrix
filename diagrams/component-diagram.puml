@@ -1,0 +1,107 @@
+@startuml
+!theme cerulean
+title Component Architecture Overview
+
+package "GNOME Shell Core" {
+    [Meta.WorkspaceManager] as WSM
+    [Shell.WorkspaceSwitcher] as SWS
+    [Overview.WorkspacesDisplay] as OWD
+    [Workspace.ThumbnailsBox] as TB
+    [Overview.ControlsManager] as CM
+    [Overview.SecondaryMonitorDisplay] as SMD
+}
+
+package "Workspace Matrix Extension" {
+    
+    package "Core Layer" {
+        [Extension] as EXT
+        [Override Base Class] as Override
+        [Settings Manager] as Settings
+        [Preferences UI] as Prefs
+    }
+    
+    package "Overview Override System" {
+        [OverviewManager] as OM
+        [WorkspacesView Override] as WVO
+        [ThumbnailsBox Override] as TBO
+        [ControlsManagerLayout Override] as CMLO
+        [SecondaryMonitorDisplay Override] as SMDO
+    }
+    
+    package "Workspace Popup System" {
+        [WorkspaceManagerOverride] as WMO
+        [WorkspaceSwitcherPopup] as WSP
+        [WorkspaceSwitcherPopupList] as WSPL
+        [WorkspaceThumbnail] as WT
+        [WorkspaceAnimation] as WA
+    }
+    
+    package "Configuration System" {
+        [GSettings Schema] as Schema
+        [Settings Store] as Store
+    }
+}
+
+' Core relationships
+EXT --> OM : manages
+EXT --> WMO : manages
+EXT --> Settings : uses
+Prefs --> Settings : configures
+
+' Override system relationships
+OM --> WVO : controls
+OM --> TBO : controls
+OM --> CMLO : controls
+OM --> SMDO : controls
+
+WVO -.-> Override : extends
+TBO -.-> Override : extends
+CMLO -.-> Override : extends
+SMDO -.-> Override : extends
+WMO -.-> Override : extends
+
+' Popup system relationships
+WMO --> WSP : creates
+WSP --> WSPL : contains
+WSP --> WA : uses
+WSPL --> WT : manages
+
+' Configuration relationships
+Settings --> Schema : reads from
+Settings --> Store : persists to
+Prefs --> Schema : configures
+
+' GNOME Shell integrations
+WVO ..> OWD : overrides methods
+TBO ..> TB : overrides methods
+CMLO ..> CM : overrides methods
+SMDO ..> SMD : overrides methods
+WMO ..> WSM : overrides methods
+WMO ..> SWS : replaces
+
+note top of Override : Base class providing common\noverride/restore functionality\nfor monkey-patching GNOME Shell
+
+note right of OM : Manages all overview-related\noverrides including workspace\ndisplay and thumbnails
+
+note right of WMO : Handles workspace navigation\nand custom popup display\ninstead of default switcher
+
+note bottom of Schema : Defines extension settings:\n- Grid dimensions\n- Popup behavior\n- Thumbnail options\n- Wraparound modes
+
+' Interface definitions
+() "GNOME Shell API" as API
+() "GSettings Interface" as GSet
+() "GTK4 Preferences" as GTK
+
+API -- WSM
+API -- SWS
+API -- OWD
+API -- TB
+API -- CM
+API -- SMD
+
+GSet -- Schema
+GSet -- Store
+
+GTK -- Prefs
+
+@enduml

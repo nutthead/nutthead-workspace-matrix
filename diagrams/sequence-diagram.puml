@@ -1,0 +1,132 @@
+@startuml
+!theme cerulean
+title Extension Lifecycle Sequence
+
+actor "GNOME Shell" as Shell
+participant "Extension" as Ext
+participant "OverviewManager" as Overview
+participant "WorkspaceManagerOverride" as WSManager
+participant "Settings" as Settings
+participant "WorkspacesView" as WSView
+participant "ThumbnailsBox" as Thumbs
+participant "WorkspaceSwitcherPopup" as Popup
+
+== Extension Enable ==
+Shell -> Ext: enable()
+activate Ext
+
+Ext -> Settings: load configuration
+Settings -> Ext: return settings
+
+note right of Ext: Initialize two major override systems
+
+Ext -> Overview: enable()
+activate Overview
+Overview -> WSView: enable()
+activate WSView
+WSView -> WSView: override workspace display methods
+WSView -> Overview: enabled
+deactivate WSView
+
+Overview -> Thumbs: enable()
+activate Thumbs
+Thumbs -> Thumbs: override thumbnail display methods
+Thumbs -> Overview: enabled
+deactivate Thumbs
+
+Overview -> Overview: enable other overview components
+Overview -> Ext: overview system enabled
+deactivate Overview
+
+Ext -> WSManager: enable()
+activate WSManager
+WSManager -> WSManager: override workspace navigation
+WSManager -> Popup: initialize()
+activate Popup
+Popup -> Popup: setup workspace switcher UI
+Popup -> WSManager: initialized
+deactivate Popup
+WSManager -> Ext: workspace system enabled
+deactivate WSManager
+
+Ext -> Shell: extension enabled
+deactivate Ext
+
+== Workspace Switch Operation ==
+Shell -> WSManager: workspace switch triggered
+activate WSManager
+WSManager -> Popup: show()
+activate Popup
+Popup -> Popup: display workspace grid
+Popup -> Popup: highlight current workspace
+Popup -> WSManager: popup displayed
+deactivate Popup
+
+WSManager -> WSManager: handle navigation input
+WSManager -> Popup: update(newWorkspace)
+activate Popup
+Popup -> Popup: animate workspace switch
+Popup -> Shell: switch to workspace
+Popup -> WSManager: workspace switched
+deactivate Popup
+
+WSManager -> Shell: navigation complete
+deactivate WSManager
+
+== Extension Disable ==
+Shell -> Ext: disable()
+activate Ext
+
+Ext -> Overview: disable()
+activate Overview
+Overview -> WSView: disable()
+activate WSView
+WSView -> WSView: restore original methods
+WSView -> Overview: disabled
+deactivate WSView
+
+Overview -> Thumbs: disable()
+activate Thumbs
+Thumbs -> Thumbs: restore original methods
+Thumbs -> Overview: disabled
+deactivate Thumbs
+
+Overview -> Overview: disable other components
+Overview -> Ext: overview system disabled
+deactivate Overview
+
+Ext -> WSManager: disable()
+activate WSManager
+WSManager -> WSManager: restore original navigation methods
+WSManager -> Popup: destroy()
+activate Popup
+Popup -> Popup: cleanup UI components
+Popup -> WSManager: destroyed
+deactivate Popup
+WSManager -> Ext: workspace system disabled
+deactivate WSManager
+
+Ext -> Shell: extension disabled
+deactivate Ext
+
+== Settings Change ==
+Shell -> Settings: settings changed
+Settings -> Ext: notify settings change
+activate Ext
+Ext -> Overview: update configuration
+activate Overview
+Overview -> WSView: reconfigure display
+Overview -> Thumbs: reconfigure thumbnails
+Overview -> Ext: reconfigured
+deactivate Overview
+
+Ext -> WSManager: update configuration
+activate WSManager
+WSManager -> Popup: reconfigure popup
+WSManager -> Ext: reconfigured
+deactivate WSManager
+
+Ext -> Shell: settings applied
+deactivate Ext
+
+@enduml

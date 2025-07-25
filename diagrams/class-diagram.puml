@@ -1,0 +1,108 @@
+@startuml
+!theme cerulean
+title Workspace Matrix Class Diagram
+
+package "Core Components" {
+    class Extension {
+        -overviewManager: OverviewManager
+        -workspaceManagerOverride: WorkspaceManagerOverride
+        +enable(): void
+        +disable(): void
+    }
+
+    class PrefsWidget {
+        -settings: Gio.Settings
+        +fillPreferencesWindow(window): void
+        -createComboRow(settingsKey, options): void
+        -createSpinRow(settingsKey, range): void
+        -createSwitchRow(settingsKey): void
+    }
+
+    abstract class Override {
+        #originalMethods: Map
+        +enable(): void
+        +disable(): void
+        #override(object, methodName, newMethod): void
+        #restore(): void
+    }
+}
+
+package "Overview System" {
+    class OverviewManager extends Override {
+        -workspacesView: WorkspacesView
+        -thumbnailsBox: ThumbnailsBox
+        -controlsManagerLayout: ControlsManagerLayout
+        -secondaryMonitorDisplay: SecondaryMonitorDisplay
+        +enable(): void
+        +disable(): void
+    }
+
+    class WorkspacesView extends Override {
+        +enable(): void
+        +disable(): void
+        -overrideWorkspacesDisplay(): void
+    }
+
+    class ThumbnailsBox extends Override {
+        +enable(): void
+        +disable(): void
+        -overrideThumbnailsDisplay(): void
+    }
+}
+
+package "Workspace Popup System" {
+    class WorkspaceManagerOverride extends Override {
+        -workspaceSwitcherPopup: WorkspaceSwitcherPopup
+        +enable(): void
+        +disable(): void
+        -overrideWorkspaceNavigation(): void
+    }
+
+    class WorkspaceSwitcherPopup {
+        -workspaceSwitcherPopupList: WorkspaceSwitcherPopupList
+        -workspaceAnimation: WorkspaceAnimation
+        +show(): void
+        +hide(): void
+        +display(direction, binding): void
+    }
+
+    class WorkspaceThumbnail {
+        -workspace: Meta.Workspace
+        +render(): void
+        +update(): void
+        +destroy(): void
+    }
+}
+
+package "Configuration" {
+    class Settings {
+        +rowCount: number
+        +columnCount: number
+        +wrapAroundMode: WrapAroundMode
+        +showThumbnails: boolean
+        +showLabels: boolean
+        +popupTimeout: number
+        +thumbnailScale: number
+        +showWorkspaceGrid: boolean
+        +multiMonitorPopup: boolean
+    }
+
+    enum WrapAroundMode {
+        NONE
+        HORIZONTAL
+        VERTICAL
+        BOTH
+    }
+}
+
+Extension --> OverviewManager : uses
+Extension --> WorkspaceManagerOverride : uses
+Extension --> Settings : configures
+
+WorkspaceManagerOverride --> WorkspaceSwitcherPopup : creates
+WorkspaceSwitcherPopup --> WorkspaceThumbnail : contains
+
+PrefsWidget --> Settings : modifies
+Settings --> WrapAroundMode : uses
+
+@enduml

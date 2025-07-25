@@ -1,0 +1,56 @@
+@startuml
+!theme cerulean
+title Workspace Matrix Class Diagram
+
+class Extension {
+    -overviewManager
+    -workspaceManagerOverride
+    +enable()
+    +disable()
+}
+
+class PrefsWidget {
+    -settings
+    +fillPreferencesWindow()
+}
+
+abstract class Override {
+    #originalMethods
+    +enable()
+    +disable()
+    #override()
+    #restore()
+}
+
+class OverviewManager extends Override {
+    +enable()
+    +disable()
+}
+
+class WorkspaceManagerOverride extends Override {
+    +enable()
+    +disable()
+}
+
+class WorkspaceSwitcherPopup {
+    +show()
+    +hide()
+    +display()
+}
+
+class Settings {
+    +rowCount
+    +columnCount
+    +wrapAroundMode
+    +showThumbnails
+    +showLabels
+    +popupTimeout
+}
+
+Extension --> OverviewManager
+Extension --> WorkspaceManagerOverride
+Extension --> Settings
+WorkspaceManagerOverride --> WorkspaceSwitcherPopup
+PrefsWidget --> Settings
+
+@enduml
