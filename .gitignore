@@ -1,5 +1,6 @@
 *.zip
 *.sublime-*
+gschemas.compiled
 ### VisualStudioCode template
 .vscode/*
 !.vscode/settings.json
