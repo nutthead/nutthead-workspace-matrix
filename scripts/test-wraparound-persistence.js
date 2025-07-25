@@ -38,7 +38,7 @@ function testWraparoundPersistence() {
         });
         
         // Test each enum value
-        for (let [name, value] of Object.entries(ENUM_VALUES)) {
+        for (const [name, value] of Object.entries(ENUM_VALUES)) {
             print(`📝 Testing ${name} (${ENUM_NAMES[value]})...`);
             
             // Set the value
